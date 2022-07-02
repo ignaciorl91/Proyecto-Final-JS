@@ -58,25 +58,13 @@ function nuevoItem() {
     ARTICULOS.push(it)
     console.log(ARTICULOS)
     updateHTML()
-
 }
 
 function listo() {
     // agregar Item 
     jQuery("#bNP").click(
-        function nuevoItem() {
-            let it = new item(
-                ARTICULOS.length + 101,
-                prompt("Nombre del producto"),
-                prompt("Categoria"),
-                parseFloat(prompt("Ingrese el precio de venta")),
-                parseInt(prompt("Ingrese cantidad de unidades")),
-            )
-            ARTICULOS.push(it)
-            console.log(ARTICULOS)
-            updateHTML()
-
-        })
+        nuevoItem()
+        )
     jQuery("#bRV").click(
         function vender() {
             let itN = parseInt(prompt("Ingrese el numero de Item vendido"))
