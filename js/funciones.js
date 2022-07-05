@@ -36,30 +36,36 @@ const ARTICULOS = [{
         importado: false
     }
 ]
-
-function updateHTML() {
-    let elementos = document.getElementById("elementos")
-    elementos.innerHTML = ""
+function elHTML() {
+    let telementos = document.getElementById("tablaElementos")
+    telementos.innerHTML = ""
     for (elem of ARTICULOS) {
-        let parrafo = document.createElement("p")
-        parrafo.innerHTML = `${elem.id}  ${elem.nombre}  ${elem.precio}  ${elem.stock}  ${elem.categoria}`
-        elementos.append(parrafo)
+        let fila = document.createElement("tr")
+        let check = document.createElement("input")
+        check.setAttribute("type","checkbox")
+        check.setAttribute("disable","")
+        if (elem.importado === true){
+            check.setAttribute("checked","true")
+        }
+
+        // let chk = document.createElement("form")
+        // chk.append(check)
+
+        fila.innerHTML = `<td>${elem.id}</td> <td>${elem.nombre}</td> <td>${elem.categoria}</td>  <td>${elem.precio}</td> <td>${elem.stock}</td> <td>${check}</td>`
+        telementos.append(fila)
+        telementos.append(check) //ESTO ESTA ACA PORQUE NO ME FUNCIONA CUANDO LO PONGO EN LA TABLA, PROBE DE VARIAS FORMAS Y NADA
     }
 }
 
-function nuevoItem() {
-    let it = new item(
-        ARTICULOS.length + 101,
-        prompt("Nombre del producto"),
-        prompt("Categoria"),
-        parseFloat(prompt("Ingrese el precio de venta")),
-        parseInt(prompt("Ingrese cantidad de unidades")),
-    )
-    ARTICULOS.push(it)
-    console.log(ARTICULOS)
-    updateHTML()
 
-}
+
+
+
+
+
+
+
+
 
 function listo() {
     // agregar Item 
@@ -74,9 +80,9 @@ function listo() {
             )
             ARTICULOS.push(it)
             console.log(ARTICULOS)
-            updateHTML()
-
-        })
+            elHTML() 
+        }
+        )
     jQuery("#bRV").click(
         function vender() {
             let itN = parseInt(prompt("Ingrese el numero de Item vendido"))
@@ -89,7 +95,7 @@ function listo() {
                 alert("No existe ningun item con ID " + itN)
             }
             console.log(ARTICULOS)
-            updateHTML()
+            elHTML() 
         })
 
     jQuery("#bAS").click(
@@ -104,7 +110,7 @@ function listo() {
                 alert("No existe ningun item con ID " + itN)
             }
             console.log(ARTICULOS)
-            updateHTML()
+            elHTML() 
         }
     )
     jQuery("#bMP").click(
@@ -117,7 +123,7 @@ function listo() {
             } else {
                 alert("Numero de id incorrecto")
             }
-            updateHTML()
+            elHTML() 
         })
     jQuery("#BAD").click(
         // CON ESTA FUNCION PODEMOS AUMENTAR LOS PRECIOS EN TODOS LOS PRODUCTOS IMPORTADOS DE A CUERDO AL AUMENTO DEL DOLAR
@@ -128,7 +134,7 @@ function listo() {
                     it.precio = (it.precio * porcentaje / 100) + it.precio
                 }
             })
-            updateHTML()
+            elHTML() 
         }
     )
 
@@ -136,17 +142,18 @@ function listo() {
         function productosSinStock() {
             let articulosSinStock = ARTICULOS.filter((it) => it.stock < 1)
             console.log(articulosSinStock)
-            updateHTML()
+            if (articulosSinStock.length<1){
+                alert("No tiene articulos sin stock")
+            }
+            else{
+                articulosSinStock.forEach((el)=>
+                alert(`Le falta stock de  ${el.nombre}`)
+                )
+            }
+            elHTML() 
         })
 }
 
-function elHTML() {
-    let elementos = document.getElementById("elementos")
-    for (elem of ARTICULOS) {
-        let parrafo = document.createElement("p")
-        parrafo.innerHTML = `${elem.id}  ${elem.nombre}  ${elem.precio}  ${elem.stock} ${elem.categoria}`
-        elementos.append(parrafo)
-    }
-}
+
 
 elHTML()
