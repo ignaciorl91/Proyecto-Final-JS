@@ -1,24 +1,29 @@
 h1{
     text-align: center;
 }
+header{
+    background-color:gainsboro;
+    /* margin-bottom: 20px; */
+    padding-bottom: 20px;
+}
 .controles{
     width: auto;
     text-align: center;
     justify-content:space-around;
-
+}
+.flex{
+    display: inline;
+    width: 170px;
+}
+#formulario{
+    position: fixed;
+    display: flex;
+    background-color: goldenrod;
+    transform: translateY(-500%);
+    transition: all 0.8s ease;
+    height: 200px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     
-}
-.btn{
-    font-size: 15px;
-    padding: 3px 4px; 
-    margin: 0 4px;
-    background-color: transparent;
-    border-radius: 20px;
-    color: black;   
-    border: 1px solid black;
-}
-.btn:hover{
-    background-color: gray;
-    color: white;
-    transition: .7s;
 }
